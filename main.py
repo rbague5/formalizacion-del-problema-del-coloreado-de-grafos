@@ -30,23 +30,24 @@ def greedy_coloring(g):
 # Greedy coloring of graph
 if __name__ == '__main__':
 
-	# Add more colors for graphs with many more vertices
-	colors = ["blue", "green", "red", "yellow", "orange", "pink",
-			  "black", "brown", "white", "purple", "voilet"]
+	# Colors to pint vertex
+	colors = ["green", "red", "yellow", "orange", "pink", "blue", "white", "maroon", "grey", "teal", "coral",
+			"navy", "aqua", "lime", "purple", "brown", "black"]
 
-	G = nx.Graph()
-	G = nx.gnp_random_graph(n=5, p=0.6, seed=4)
+	# GEneration of random graph, n=number of nodes with p probability of have an edge
+	G = nx.gnp_random_graph(n=20, p=0.5, seed=4)
 
 	result = greedy_coloring(G)
 	colours_used = [colors[i] for i in list(result.values())]
 
 	pos = nx.spring_layout(G)
 	nx.draw(G, pos, nodelist=sorted(G.nodes()), node_color=colours_used, with_labels=True,
-			node_size=1500, font_size=8, font_weight='bold')
+			node_size=150, font_size=8, font_weight='bold')
 
-	plt.savefig("colored_graph.png", format="PNG", bbox_inches='tight')
+	plt.savefig("colored_graph.png", format="PNG", dpi=190)
 
 	print("################# RESULTS #################")
 	print(f"Nodes: {G.nodes()}")
 	print(f"Adjacent vertices: {G.edges()}")
-	print(f"Number of colours used: {len(set(colours_used))}")
+	# print(f"Number of colours used: {len(set(colours_used))}")
+	print(f"Number of colors should use: {max(list(result.values()))+1}")
